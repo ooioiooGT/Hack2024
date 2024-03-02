@@ -3,7 +3,8 @@ import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './Screen/Login';
-import Singup from './Screen/Singup';
+import Signup from './Screen/Signup';
+
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -11,7 +12,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         {/* <Stack.Screen name="Login" component={Login} /> */}
-        <Stack.Screen name="Singup" component={Singup} />
+        <Stack.Screen name="Sign Up Page" component={Signup} />
       </Stack.Navigator>
     </NavigationContainer>
   );
