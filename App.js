@@ -8,12 +8,15 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Login from './Screen/Login';
 import Home from './Screen/Home';
 import Signup from './Screen/Signup';
+import Transaction from './Screen/Transaction';
+
+
 
 export default function App() {
   const Stack = createNativeStackNavigator();
   const [user, setUser] = useState(null);
   const auth = getAuth();
-
+  
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       console.log('user', user);
@@ -28,7 +31,7 @@ export default function App() {
       <Stack.Navigator>
       {user ? (
           // User is logged in
-          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name ="Transaction" component={Transaction} />
         ) : (
           // No user is logged in
           <>
@@ -36,6 +39,7 @@ export default function App() {
             <Stack.Screen name="Signup" component={Signup} options={{headerShown: false}} />
           </>
         )}
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

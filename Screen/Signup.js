@@ -15,7 +15,7 @@ const Signup = () => {
   const db = FIREBASE_DB;
 
   async function DataStore(uid) {
-    const UserRef = doc(db, "users", uid);
+    const UserRef = doc(db, "users", uid, "Name", "data");
     try {
       await setDoc(UserRef, {
         fName,
@@ -71,14 +71,16 @@ const Signup = () => {
       style={styles.input}
       value={password}
       placeholder= 'Password'
-      onChangeText = {(password) => setPassword(password)}>
+      onChangeText = {(password) => setPassword(password)}
+      secureTextEntry={true}>
       </TextInput>
 
       <TextInput
       style={styles.input}
       value={conPassword}
       placeholder= 'Re-Password'
-      onChangeText = {(conPassword) => setConPassword(conPassword)}>
+      onChangeText = {(conPassword) => setConPassword(conPassword)}
+      secureTextEntry={true}>
       </TextInput>
 
       
