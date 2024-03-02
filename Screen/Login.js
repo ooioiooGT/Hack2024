@@ -19,17 +19,17 @@ const Login = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.h1}>CashIQ</Text>
-      <TextInput style={styles.input} placeholder='email' />
+      <TextInput style={[styles.input, styles.bottom]} placeholder='email' />
       <TextInput style={styles.input} placeholder='password' secureTextEntry={true}/>
 
       <TouchableOpacity>
-        <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']}>
-          <Text onPress={login} style={styles.loginBtn}>Login</Text>
-        </LinearGradient>
+        {/* <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']}> */}
+          <Text onPress={login} style={styles.Btn}>Login</Text>
+        {/* </LinearGradient> */}
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => navigation.navigate('Singup')}>
-        <Text>Sign-Up</Text>
+        <Text style={styles.Btn}>Sign-Up</Text>
       </TouchableOpacity>
     </View>
   )
@@ -40,7 +40,9 @@ export default Login
 const styles = StyleSheet.create({
   h1:{
     color: '#fff',
-    fontSize: 30
+    fontSize: 40,
+    fontWeight: 'bold',
+    paddingBottom: 40,
   }, 
 
   input:{
@@ -57,18 +59,24 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    // justifyContent: 'center',
+    justifyContent: 'center',
     backgroundColor: '#302D43',
   },
 
-  loginBtn: {
-    width: '80%',
-    backgroundColor: '#5F5F5F',
+  Btn: {
+    width: 80,
+    textAlign: 'center',
+    backgroundColor: '#3d3d4e',
+    borderColor: 'black',
     borderRadius: 25,
-    height: 50,
+    padding: 10,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 40,
-    marginBottom: 10,
+    color: '#fff'
+  },
+
+  bottom:{
+    marginBottom: 30,
   }
 })
