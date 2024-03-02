@@ -5,6 +5,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { FIREBASE_AUTH } from '../Firebase';
 import { LinearGradient } from 'react-native-linear-gradient';
 import Signup from './Signup';
+import CustomButton from '../components/Nav';
 
 const Login = () => {
   const navigation = useNavigation();
@@ -18,7 +19,12 @@ const Login = () => {
     }catch(error){
       console.log(error);
   } 
+
+  const handlePress = () => {
+    console.log("It worked");
   }
+  }
+
   return (
 
     <View style={styles.container}>
@@ -29,6 +35,9 @@ const Login = () => {
       <TouchableOpacity>
         {/* <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']}> */}
           <Text onPress={login} style={styles.Btn}>Login</Text>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <CustomButton onPress={handlePress} title="Press Me" />
+    </View>
         {/* </LinearGradient> */}
       </TouchableOpacity>
 
