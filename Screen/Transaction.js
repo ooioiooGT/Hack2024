@@ -12,7 +12,6 @@ const Transaction = () => {
     const userID = FIREBASE_AUTH.currentUser.uid;
     const db = FIREBASE_DB;
   const [date, setDate] = useState('');
-  const [category, setCategory] = useState('');
   const [amount, setAmount] = useState('');
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
@@ -38,6 +37,9 @@ const Transaction = () => {
         console.log(date);
         console.log(value);
         console.log(amount);
+        setDate('');
+        setValue('');
+        setAmount('');
     }
   return (
     <View>

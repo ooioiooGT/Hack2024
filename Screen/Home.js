@@ -1,15 +1,17 @@
 
-import { StyleSheet, View, Text, TouchableOpacity, FlatList, Image} from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { StyleSheet, View, Text, TouchableOpacity, FlatList ,Image} from 'react-native'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import Nav from '../components/Nav';
 import  { collection, getDocs } from 'firebase/firestore';
 import {FIREBASE_AUTH, FIREBASE_DB } from '../Firebase';
+import { useFocusEffect } from '@react-navigation/native';
 
 
 const Home = () => {
   const navigation = useNavigation();
   const [transactions, setTransactions] = useState([]);
+  const [totalAmount, setTotalAmount] = useState(0);
 
 
   const fecthTransac = async () => {
@@ -31,12 +33,21 @@ const Home = () => {
     //   console.log(doc.id, '=>', doc.data());
     // });
     setTransactions(fetchedTransactions);
+    console.log(fecthTransac);
   };
     
 
+  useFocusEffect(
+    useCallback(() => {
+        fecthTransac();
+    }, [])
+  );
+
 useEffect(() => {
-    fecthTransac();
-}, []);
+    // Calculate the total amount whenever transactions change
+    const total = transactions.reduce((sum, transaction) => sum + Number(transaction.amount || 0), 0);
+    setTotalAmount(total);
+  }, [transactions]);
 
 const renderHeader = () => (
     <View style={styles.header}>
@@ -74,6 +85,25 @@ const renderHeader = () => (
       />
 
       <Nav />
+                <FlatList
+                data={transactions}
+                keyExtractor={(item) => item.id}
+                ListHeaderComponent={renderHeader}
+                renderItem={({ item }) => (
+                    <View style={styles.item}>
+                        <Text style={styles.column}>{item.date}</Text>
+                        <Text style={styles.column}>{item.category}</Text>
+                        <Text style={styles.column}>{item.amount}</Text>
+                    </View>
+                )}
+            />
+             <Text style={styles.totalAmount}>Total Amount: {totalAmount}</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('Transaction')}>
+                <Text>Add Transaction</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Graphs')}>
+                <Text>Show Graph</Text>
+            </TouchableOpacity>
     </View>
     
   )
