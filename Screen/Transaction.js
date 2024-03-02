@@ -4,6 +4,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { FIREBASE_AUTH, FIREBASE_DB } from '../Firebase';
 import DatePicker from "react-native-modern-datepicker"
 import { setDoc, doc , addDoc, collection} from 'firebase/firestore';
+import Nav from '../components/Nav';
 
 
 
@@ -32,7 +33,7 @@ const Transaction = () => {
             category:value,
             amount: amount,
           });
-          console.log("Data stored successfully");
+        console.log("Data stored successfully");
         console.log(userID);
         console.log(date);
         console.log(value);
@@ -62,6 +63,7 @@ const Transaction = () => {
         <Text>Submit</Text>
       </TouchableOpacity>
       </KeyboardAvoidingView>
+      <Nav/>
     </View>
   )
 }

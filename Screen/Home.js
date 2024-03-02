@@ -1,13 +1,10 @@
+
 import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import Nav from '../components/Nav';
 import  { collection, getDocs } from 'firebase/firestore';
 import {FIREBASE_AUTH, FIREBASE_DB } from '../Firebase';
-import Graphs from './Graphs'; // Adjust path as necessary
-import Transaction from './Transaction'; // Adjust path as necessary
-
-
 
 const Home = () => {
   const navigation = useNavigation();

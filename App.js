@@ -6,12 +6,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 import Login from './Screen/Login';
-import Home from './Screen/Home';
 import Signup from './Screen/Signup';
-import Transaction from './Screen/Transaction';
+import Home from './Screen/Home';
 import Wallet from './Screen/Wallet';
 import Graphs from './Screen/Graphs';
 import Profile from './Screen/Profile';
+import Transaction from './Screen/Transaction';
 
 
 export default function App() {
@@ -34,7 +34,7 @@ export default function App() {
       {user ? (
           <>
             <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="Wallet" component={Wallet} />
+            <Stack.Screen name="Transaction" component={Transaction} />
             <Stack.Screen name="Graphs" component={Graphs} />
             <Stack.Screen name="Profile" component={Profile} />
           </>
