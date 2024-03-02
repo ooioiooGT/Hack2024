@@ -1,10 +1,10 @@
-import { StyleSheet, TextInput, View, ActivityIndicator, Button, KeyboardAvoidingView } from 'react-native'
+import { StyleSheet, TextInput, View, ActivityIndicator, TouchableOpacity, Text, KeyboardAvoidingView } from 'react-native'
 import React, { useState } from 'react'
 import { FIREBASE_AUTH, FIREBASE_DB } from '../Firebase';
 import {createUserWithEmailAndPassword, onAuthStateChanged} from 'firebase/auth';
 import { addDoc } from 'firebase/firestore';
 
-const Singup = () => {
+const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fName, setfName] = useState('');
@@ -33,6 +33,7 @@ const Singup = () => {
   }
   return (
     <View style={styles.container}>
+      <Text style={styles.title}> CashIQ </Text>
       <KeyboardAvoidingView behavior='padding'>
       <TextInput
       style={styles.input}
@@ -71,8 +72,10 @@ const Singup = () => {
 
       {loading ? (<ActivityIndicator size='large' color='#0000ff' /> 
       ): (
-      <>
-        <Button title='Create account' onPress={signUp}/>  
+        <>
+        <TouchableOpacity style={styles.button} onPress={signUp}>
+          <Text style={styles.buttonText}>Create account</Text>
+        </TouchableOpacity>
       </>
       )}
      </KeyboardAvoidingView>
@@ -80,15 +83,16 @@ const Singup = () => {
   );
 };
 
-export default Singup
+export default Signup
 
 const styles = StyleSheet.create({
   container:{
-    marginHorizontal: 20,
     flex: 1,
     justifyContent: 'center',
+    backgroundColor: '#302D43',
 },
 input:{
+    marginHorizontal: 20,
     marginVertical: 4,
     height: 50,
     borderWidth: 1,
@@ -96,4 +100,25 @@ input:{
     padding: 10,
     backgroundColor: '#fff',
 },
+button:{
+  marginHorizontal: 20,
+  marginVertical: 4,
+  height: 50,
+  borderRadius: 4,
+  backgroundColor: '#fff',
+  justifyContent: 'center', // Align button contents vertically
+  alignItems: 'center', // Align button contents horizontally
+},
+buttonText: {
+  fontSize: 16,
+  fontWeight: 'bold',
+  color: '#302D43',
+},
+title:{
+  color: '#fff',
+  fontSize: 55,
+  marginBottom: 20,
+  fontWeight: 'bold',
+  textAlign: 'center',
+}
 });

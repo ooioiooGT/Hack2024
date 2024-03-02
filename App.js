@@ -6,7 +6,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 import Login from './Screen/Login';
-import Singup from './Screen/Singup';
 import Home from './Screen/Home';
 
 export default function App() {
