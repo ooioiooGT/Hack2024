@@ -31,7 +31,7 @@ export default function App() {
       <Stack.Navigator>
       {user ? (
           // User is logged in
-          <Stack.Screen name ="Transaction" component={Transaction} />
+          <Stack.Screen name ="Home" component={Home} />
         ) : (
           // No user is logged in
           <>
