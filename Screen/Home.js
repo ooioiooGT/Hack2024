@@ -115,10 +115,10 @@ const styles = StyleSheet.create({
 
 
   title:{
-    color: '#fff',
+    color: '#FD8450',
     fontSize: 20,
     fontWeight: 'bold',
-    margin: 10,
+    marginTop: 10,
   },
   welcome:{
     flexDirection: 'row',
