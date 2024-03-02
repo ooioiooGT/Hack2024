@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View , TextInput, TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import Singup from './Signup';
+import Signup from './Signup';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Auth } from '../Firebase';
 import { LinearGradient } from 'react-native-linear-gradient';
