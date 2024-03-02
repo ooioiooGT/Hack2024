@@ -42,12 +42,12 @@ const Transaction = () => {
         setAmount('');
     }
   return (
-    <View>
-      <Text>Transaction</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Transaction</Text>
       <KeyboardAvoidingView>
-        <Text>Date</Text>
-        <TextInput value={date} placeholder='mm/dd//yyyy' onChangeText={setDate}/>
-        <Text>Category</Text>
+        <Text style={styles.label}>Date</Text>
+        <TextInput value={date} style={styles.input} placeholder='mm/dd//yyyy' onChangeText={setDate}/>
+        <Text style={styles.label}>Category</Text>
         <DropDownPicker
         open={open}
         value={value}
@@ -56,12 +56,12 @@ const Transaction = () => {
         setValue={setValue}
         setItems={setItems}
         placeholder="Select a category"
-        // style={styles.picker}
+        style={styles.picker}
         // dropDownContainerStyle={styles.dropDownPicker}
       />
-      <Text>Amount</Text>
-      <TextInput value ={amount} placeholder='Amount' onChangeText={setAmount}/>
-      <TouchableOpacity onPress={submit}>
+      <Text style={styles.label}>Amount</Text>
+      <TextInput value ={amount} style={styles.input} placeholder='Amount' onChangeText={setAmount}/>
+      <TouchableOpacity style={styles.Btn} onPress={submit}>
         <Text>Submit</Text>
       </TouchableOpacity>
       </KeyboardAvoidingView>
@@ -71,3 +71,55 @@ const Transaction = () => {
 }
 
 export default Transaction;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#302D43',
+
+  },
+  input:{
+    marginHorizontal: 20,
+    marginVertical: 4,
+    height: 50,
+    borderWidth: 1,
+    borderRadius: 4,
+    padding: 10,
+    backgroundColor: '#fff',
+    width: '80%'
+  },
+  Btn: {
+    marginLeft: 20,
+    marginHorizontal: 65,
+    marginVertical: 4,
+    height: 50,
+    borderRadius: 4,
+    backgroundColor: '#fff',
+    justifyContent: 'center', // Align button contents vertically
+    alignItems: 'center', // Align button contents horizontally
+  },
+  label:{
+    color: '#fff',
+    fontSize: 25,
+    margin: 5,
+    fontWeight: 'bold',
+    marginLeft: 20,
+  },
+  title:{
+    color: '#fff',
+    fontSize: 40,
+    fontWeight: 'bold',
+    margin: 20,
+    textAlign: 'center',
+  },
+  picker:{
+    marginHorizontal: 20,
+    marginVertical: 4,
+    height: 50,
+    borderWidth: 1,
+    borderRadius: 4,
+    padding: 10,
+    backgroundColor: '#fff',
+    width: '80%'
+  }
+})
