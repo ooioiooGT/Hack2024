@@ -27,7 +27,7 @@ const Graphs = () => {
           backgroundColor="#fff" // Color of the background circle
           onAnimationComplete={() => console.log('Animation completed')}
           onProgressChange={handleProgressChange}
-          style={{ marginTop: 30 }}
+          style={{ marginTop: 30, marginBottom: 30 }}
 
         />
       </View>
