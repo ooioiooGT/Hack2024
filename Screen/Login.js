@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View , TextInput, TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import Singup from './Signup';
+import Signup from './Signup';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Auth } from '../Firebase';
 
@@ -22,8 +22,8 @@ const Login = () => {
       <TouchableOpacity>
         <Text onPress={login}>Login</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Singup')}>
-        <Text>Singup</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+        <Text>Signup</Text>
       </TouchableOpacity>
     </View>
   )
