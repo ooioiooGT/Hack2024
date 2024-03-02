@@ -2,6 +2,8 @@ import { StyleSheet, View, Text, Image, TextInput, Button} from 'react-native'
 import React, {useState} from 'react'
 import { BlurView } from '@react-native-community/blur';
 import Nav from '../components/Nav';
+import { FIREBASE_AUTH } from '../Firebase';
+import { signOut } from 'firebase/auth';
 
 
 const Options = () => {
@@ -10,6 +12,17 @@ const Options = () => {
   const [email, setEmail] = useState('Johnny@gmail.com');
   const [password, resetPassword] = useState('***********');
 
+  
+  // Function to sign out the user
+  const handleSignOut = async () => {
+    try {
+      await signOut(FIREBASE_AUTH);
+      console.log('User signed out successfully');
+      // Here you can navigate the user back to the login screen or perform other actions
+    } catch (error) {
+      console.error('Error signing out: ', error);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -22,7 +35,8 @@ const Options = () => {
           </View>
 
           <View style={styles.org}>
-            <Button color='#FD8450' title='Logout'/>
+            <Button color='#FD8450' title='Update'/>
+            <Button color='#FD8450' title='Logout' onPress={handleSignOut}/>
         </View>
         <Nav/>
     </View>
