@@ -1,8 +1,8 @@
 import { StyleSheet, TextInput, View, ActivityIndicator, TouchableOpacity, Text, KeyboardAvoidingView } from 'react-native'
 import React, { useState } from 'react'
 import { FIREBASE_AUTH, FIREBASE_DB } from '../Firebase';
-import {createUserWithEmailAndPassword, onAuthStateChanged} from 'firebase/auth';
-import { addDoc } from 'firebase/firestore';
+import {createUserWithEmailAndPassword} from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -12,25 +12,36 @@ const Signup = () => {
   const [conPassword, setConPassword] = useState('');
 
   const auth = FIREBASE_AUTH;
-  const signUp = async () => {
-    if ( password == conPassword){
-    try {
+  const db = FIREBASE_DB;
 
+  async function DataStore(uid) {
+    const UserRef = doc(db, "users", uid);
+    try {
+      await setDoc(UserRef, {
+        fName,
+        lName
+      });
+      console.log("Data stored successfully");
+    } catch (error) {
+      console.error("Error storing user data:", error);
+      alert('Data storage failed: ' + error.message);
+    }
+  }
+
+  const signUp = async () => {
+    if (password === conPassword) {
+      try {
         const response = await createUserWithEmailAndPassword(auth, email, password);
-        const user = response.user.uid;
-        addDoc(FIREBASE_DB, user, "information"),{
-          firstname: fName,
-          lastname: lName,
-        };
-    } catch (error){
+        const userID = response.user.uid;
+        await DataStore(userID); // Pass the user ID to the DataStore function
+      } catch (error) {
         console.log(error);
         alert('Sign up failed: ' + error.message);
-    } 
-  }else{
-    alert("The password doesn't match")
-    return
-  }
-  }
+      }
+    } else {
+      alert("The passwords don't match.");
+    }
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.title}> CashIQ </Text>
