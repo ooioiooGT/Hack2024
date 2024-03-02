@@ -14,7 +14,7 @@ const Graphs = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Spent</Text>
+      <Text style={styles.title}>Spent Ratio</Text>
       <Dropdown />
 
       <View>
