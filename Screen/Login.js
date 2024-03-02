@@ -1,26 +1,36 @@
 import { StyleSheet, Text, View , TextInput, TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useState } from 'react';
 import Signup from './Signup';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { Auth } from '../Firebase';
+import { FIREBASE_AUTH } from '../Firebase';
 import { LinearGradient } from 'react-native-linear-gradient';
 
 const Login = () => {
   const navigation = useNavigation();
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [udi, setUdi] = useState('');
 
   const login = async() => {
+    setLoading(true);
     try{
-      await signInWithEmailAndPassword(Auth, email, password);
+      await signInWithEmailAndPassword(FIREBASE_AUTH, email, password);
+      alert('Success!')
     }catch(error){
       console.log(error);
-  };
+  } 
+  finally{
+    setLoading(false);
+   }
   }
   return (
+
     <View style={styles.container}>
       <Text style={styles.h1}>CashIQ</Text>
       <TextInput style={[styles.input, styles.bottom]} placeholder='email' />
-      <TextInput style={styles.input} placeholder='password' secureTextEntry={true}/>
+      <TextInput style={styles.input} placeholder='password' secureTextEntry={true} secureTextEntry={true}/>
 
       <TouchableOpacity>
         {/* <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']}> */}
