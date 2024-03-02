@@ -23,8 +23,8 @@ const Login = () => {
 
     <View style={styles.container}>
       <Text style={styles.h1}>CashIQ</Text>
-      <TextInput value={email} style={[styles.input, styles.bottom]} placeholder='email' onchange={(email)=>setEmail(email)} />
-      <TextInput value={password} style={styles.input} placeholder='password' secureTextEntry={true} onchange={(password)=>setPassword(password)}/>
+      <TextInput value={email} style={[styles.input, styles.bottom]} placeholder='email' onChangeText={(email)=>setEmail(email)} />
+      <TextInput value={password} style={styles.input} placeholder='password' secureTextEntry={true} onChangeText={(password)=>setPassword(password)}/>
 
       <TouchableOpacity>
         {/* <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']}> */}

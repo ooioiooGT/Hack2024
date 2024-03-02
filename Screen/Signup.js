@@ -66,7 +66,7 @@ const Signup = () => {
       <TextInput
       style={styles.input}
       value={conPassword}
-      placeholder= 'Password'
+      placeholder= 'Re-Password'
       onChangeText = {(conPassword) => setConPassword(conPassword)}>
       </TextInput>
 
