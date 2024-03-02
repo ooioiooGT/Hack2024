@@ -6,7 +6,7 @@ import Dropdown from '../components/DropDown';
 import Nav from '../components/Nav';
 
 const Graphs = () => {
-  const [progress, setProgress] = React.useState(90); // Set initial progress
+  const [progress, setProgress] = React.useState(0); // Set initial progress
 
   const handleProgressChange = (newProgress) => {
     setProgress(newProgress);
