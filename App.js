@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, View, KeyboardAvoidingView, Settings } from 'react-native';
 import React, {useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -8,6 +8,9 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Login from './Screen/Login';
 import Home from './Screen/Home';
 import Signup from './Screen/Signup';
+import Wallet from './Screen/Wallet';
+import Graphs from './Screen/Graphs';
+import Options from './Screen/Settings';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -27,8 +30,13 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
       {user ? (
-          // User is logged in
-          <Stack.Screen name="Home" component={Home} />
+          // User is logged i
+          <>
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="Wallet" component={Wallet} />
+            <Stack.Screen name="Graphs" component={Graphs} />
+            <Stack.Screen name="Settings" component={Options} />
+          </>
         ) : (
           // No user is logged in
           <>
