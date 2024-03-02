@@ -70,14 +70,11 @@ const Signup = () => {
       onChangeText = {(conPassword) => setConPassword(conPassword)}>
       </TextInput>
 
-      {loading ? (<ActivityIndicator size='large' color='#0000ff' /> 
-      ): (
-        <>
+      
+
         <TouchableOpacity style={styles.button} onPress={signUp}>
           <Text style={styles.buttonText}>Create account</Text>
         </TouchableOpacity>
-      </>
-      )}
      </KeyboardAvoidingView>
     </View>
   );

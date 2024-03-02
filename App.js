@@ -7,6 +7,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 import Login from './Screen/Login';
 import Home from './Screen/Home';
+import Signup from './Screen/Signup';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -30,7 +31,10 @@ export default function App() {
           <Stack.Screen name="Home" component={Home} />
         ) : (
           // No user is logged in
-          <Stack.Screen name="Login" component={Login} />
+          <>
+            <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
+            <Stack.Screen name="Signup" component={Signup} options={{headerShown: false}} />
+          </>
         )}
       </Stack.Navigator>
     </NavigationContainer>

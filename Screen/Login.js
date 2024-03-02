@@ -1,36 +1,30 @@
 import { StyleSheet, Text, View , TextInput, TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import Signup from './Signup';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { FIREBASE_AUTH } from '../Firebase';
 import { LinearGradient } from 'react-native-linear-gradient';
+import Signup from './Signup';
 
 const Login = () => {
   const navigation = useNavigation();
-  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [udi, setUdi] = useState('');
 
   const login = async() => {
-    setLoading(true);
     try{
       await signInWithEmailAndPassword(FIREBASE_AUTH, email, password);
       alert('Success!')
     }catch(error){
       console.log(error);
   } 
-  finally{
-    setLoading(false);
-   }
   }
   return (
 
     <View style={styles.container}>
       <Text style={styles.h1}>CashIQ</Text>
-      <TextInput style={[styles.input, styles.bottom]} placeholder='email' />
-      <TextInput style={styles.input} placeholder='password' secureTextEntry={true} secureTextEntry={true}/>
+      <TextInput value={email} style={[styles.input, styles.bottom]} placeholder='email' onchange={(email)=>setEmail(email)} />
+      <TextInput value={password} style={styles.input} placeholder='password' secureTextEntry={true} onchange={(password)=>setPassword(password)}/>
 
       <TouchableOpacity>
         {/* <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']}> */}
@@ -38,8 +32,10 @@ const Login = () => {
         {/* </LinearGradient> */}
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate('Singup')}>
-        <Text style={styles.Btn}>Sign-Up</Text>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Signup')}
+        style={styles.signUpButton}>
+        <Text style={styles.signUpButtonText}>Sign Up</Text>
       </TouchableOpacity>
     </View>
   )
