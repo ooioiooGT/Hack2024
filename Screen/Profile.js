@@ -15,14 +15,13 @@ const Options = () => {
     <View style={styles.container}>
         <Image source={require('../assets/puppy.webp')} style={styles.img}/>
         <View>
-          <TextInput style={styles.input} placeholder='First Name' value={firstName} onChangeText={(text)=>setFirstName(text)}/>
-          <TextInput style={styles.input} placeholder='Last Name' value={lastName} onChangeText={(text)=>setLastName(text)}/>
-          <TextInput style={styles.input} placeholder='Email' value={email} onChangeText={(text)=>setEmail(text)}/>
-          <TextInput style={styles.input} placeholder='Password' value={password} onChangeText={(text)=>resetPassword(text)}/>
+          <TextInput editable={false} style={styles.input} placeholder='First Name' value={firstName} onChangeText={(text)=>setFirstName(text)}/>
+          <TextInput editable={false} style={styles.input} placeholder='Last Name' value={lastName} onChangeText={(text)=>setLastName(text)}/>
+          <TextInput editable={false} style={styles.input} placeholder='Email' value={email} onChangeText={(text)=>setEmail(text)}/>
+          <TextInput editable={false} style={styles.input} placeholder='Password' value={password} onChangeText={(text)=>resetPassword(text)}/>
           </View>
 
           <View style={styles.org}>
-            <Button color='#FD8450' title='Update'/>
             <Button color='#FD8450' title='Logout'/>
         </View>
         <Nav/>
@@ -44,6 +43,7 @@ const styles = StyleSheet.create({
     color: '#FFF',
   },
   input:{
+    textAlign: 'center',
     marginHorizontal: 20,
     marginVertical: 4,
     height: 50,
