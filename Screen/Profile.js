@@ -6,7 +6,7 @@ import { BlurView } from '@react-native-community/blur';
 const Options = () => {
   return (
     <View>
-        <Text>SETTINGS</Text>
+        <Text>PROFILE</Text>
     </View>
   )
 }

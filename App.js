@@ -10,7 +10,7 @@ import Home from './Screen/Home';
 import Signup from './Screen/Signup';
 import Wallet from './Screen/Wallet';
 import Graphs from './Screen/Graphs';
-import Options from './Screen/Settings';
+import Profile from './Screen/Profile';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -35,7 +35,7 @@ export default function App() {
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="Wallet" component={Wallet} />
             <Stack.Screen name="Graphs" component={Graphs} />
-            <Stack.Screen name="Settings" component={Options} />
+            <Stack.Screen name="Profile" component={Profile} />
           </>
         ) : (
           // No user is logged in
