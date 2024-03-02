@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faHouse, faWallet, faChartSimple, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faWallet, faChartSimple, faUser, faMoneyCheckDollar } from '@fortawesome/free-solid-svg-icons';
 
 const Nav = () => {
   const navigation = useNavigation();
@@ -14,8 +14,8 @@ const Nav = () => {
         <FontAwesomeIcon style={styles.Btn} icon={faHouse} size={25} />
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate('Wallet')} >
-        <FontAwesomeIcon style={styles.Btn} icon={faWallet} size={25} />
+      <TouchableOpacity onPress={() => navigation.navigate('Transaction')} >
+        <FontAwesomeIcon style={styles.Btn} icon={faMoneyCheckDollar} size={25} />
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => navigation.navigate('Graphs')} >
