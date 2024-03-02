@@ -62,20 +62,22 @@ const renderHeader = () => (
       <View style={styles.welcome}>
         <Text style={styles.company}>CashIQ</Text>
         <Text style={styles.user}>Welcome {FIREBASE_AUTH.currentUser.displayName}</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
         <Image source={require('../assets/puppy.webp')} style={styles.img}/>
+        </TouchableOpacity>
       </View>
-       
+      
       <TouchableOpacity onPress={() => navigation.navigate('Transaction')}>
-      <Text>Add Transaction</Text>
+      <Text style={styles.title}>Add Transaction</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('Graphs')}>
-          <Text>Show Graph</Text>
+          <Text style={styles.title} >Show Graph</Text>
       </TouchableOpacity>
       <FlatList 
         data={transactions} 
         keyExtractor={(item) => item.id}
           ListHeaderComponent={renderHeader}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
               <View style={styles.item}>
                   <Text style={styles.column}>{item.date}</Text>
                   <Text style={styles.column}>{item.category}</Text>
@@ -83,27 +85,11 @@ const renderHeader = () => (
               </View>
           )}
       />
+      <View style={styles.total}>
+          <Text style={styles.totalAmount}>Total Amount: {totalAmount}</Text>
+        </View> 
 
       <Nav />
-                <FlatList
-                data={transactions}
-                keyExtractor={(item) => item.id}
-                ListHeaderComponent={renderHeader}
-                renderItem={({ item }) => (
-                    <View style={styles.item}>
-                        <Text style={styles.column}>{item.date}</Text>
-                        <Text style={styles.column}>{item.category}</Text>
-                        <Text style={styles.column}>{item.amount}</Text>
-                    </View>
-                )}
-            />
-             <Text style={styles.totalAmount}>Total Amount: {totalAmount}</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('Transaction')}>
-                <Text>Add Transaction</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Graphs')}>
-                <Text>Show Graph</Text>
-            </TouchableOpacity>
     </View>
     
   )
@@ -115,6 +101,12 @@ const styles = StyleSheet.create({
   container:{
     flex: 1,
     backgroundColor: '#302D43',
+  },
+  title:{
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: 'bold',
+    margin: 10,
   },
   welcome:{
     flexDirection: 'row',
@@ -153,6 +145,8 @@ const styles = StyleSheet.create({
   column: {
       flex: 1,
       fontSize: 16,
+      fontWeight: 'bold',
+      color: '#fff',
   },
 
   clearBack: {
@@ -169,6 +163,20 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     borderWidth: 3,
     borderColor: '#8930E8'
-  }
+  },
+  total:{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    margin: 10,
+    position: 'relative',
+    top: -300
+  },
+  totalAmount:{
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#fff',
+    textAlign: 'center',
+  },
 
 })
