@@ -23,6 +23,7 @@ const amounts = transactions.map(transaction => transaction.amount);
 console.log('Categories:', categories);
 console.log('Amounts:', amounts);
 
+
   const handleProgressChange = (newProgress) => {
     setProgress(newProgress);
   };

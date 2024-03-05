@@ -70,10 +70,9 @@ const Home = () => {
       <Text style={styles.headerText}>Category</Text>
       <Text style={styles.headerText}>Amount</Text>
     </View>
-  );
-
+);
   return (
-    <View style={styles.container}>
+    <View style={styles.container} >
       <View style={styles.welcome}>
         <Text style={styles.company}>CashIQ</Text>
         <Text style={styles.user}>Welcome {fName}</Text>
@@ -81,7 +80,6 @@ const Home = () => {
           <Image source={require('../assets/puppy.webp')} style={styles.img}/>
         </TouchableOpacity>
       </View>
-
       <TouchableOpacity onPress={() => navigation.navigate('Transaction')}>
         <Text style={styles.title}>Add Transaction</Text>
       </TouchableOpacity>
@@ -103,8 +101,26 @@ const Home = () => {
       <View style={styles.total}>
         <Text style={styles.totalAmount}>Total Amount: {totalAmount}</Text>
       </View> 
+        <View style={styles.list}>
+          <FlatList 
+            data={transactions} 
+            keyExtractor={(item) => item.id}
+              ListHeaderComponent={renderHeader}
+              renderItem={({ item }) => (
+                  <View style={styles.item}>
+                      <Text style={styles.column}>{item.date}</Text>
+                      <Text style={styles.column}>{item.category}</Text>
+                      <Text style={styles.column}>{item.amount}</Text>
+                  </View>
+              )}
+          />
+        </View>
+      </View>
 
+  
+      <Text style={styles.totalAmount}>Total Amount: {totalAmount}</Text>
       <Nav />
+
     </View>
   );
 };
@@ -117,11 +133,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#302D43',
   },
+
+  data:{
+    width: '90%',
+    height: '50%',
+    justifyContent: 'center',
+  },
+
+
   title:{
-    color: '#fff',
+    color: '#FD8450',
     fontSize: 20,
     fontWeight: 'bold',
-    margin: 10,
+    marginTop: 10,
   },
   welcome:{
     flexDirection: 'row',
@@ -129,18 +153,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 10,
   },
+
   user:{
     fontSize: 14,
     fontWeight: 'bold',
     color: '#fff',
     textAlign: 'center',
   },
+
   company:{
     fontSize: 24,
     fontWeight: 'bold',
     color: '#fff',
     textAlign: 'center',
   },
+
   header: {
       flexDirection: 'row',
       padding: 10,
@@ -154,7 +181,7 @@ const styles = StyleSheet.create({
   item: {
       flexDirection: 'row',
       padding: 10,
-      // borderBottomWidth: 1,
+      borderBottomWidth: 1,
       borderBottomColor: '#ccc',
   },
   column: {
@@ -162,6 +189,7 @@ const styles = StyleSheet.create({
       fontSize: 16,
       fontWeight: 'bold',
       color: '#fff',
+      textAlign: 'center',
   },
 
   clearBack: {
@@ -179,19 +207,28 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: '#8930E8'
   },
-  total:{
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    margin: 10,
-    position: 'relative',
-    top: -300
-  },
+  
   totalAmount:{
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#fff',
     textAlign: 'center',
+    zIndex: 2,
+    position: 'relative',
+    padding: 10,
+    marginTop: 10,
+    alignSelf: 'center',
+    backgroundColor: '#FD8450',
+    borderRadius: 30,
+
+    marginTop: 100,
+  },
+
+  list:{
+    width: '100%',
+    justifyContent: 'center',
+    marginLeft: 20,
+    marginTop: 20,
   },
 
 })

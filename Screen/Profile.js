@@ -35,7 +35,6 @@ const Options = () => {
           </View>
 
           <View style={styles.org}>
-            <Button color='#FD8450' title='Update'/>
             <Button color='#FD8450' title='Logout' onPress={handleSignOut}/>
         </View>
         <Nav/>
