@@ -1,32 +1,42 @@
 import React, { useState } from 'react';
 import RNPickerSelect from 'react-native-picker-select';
 import { View, Text , StyleSheet} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const Dropdown = () => {
+    const navigation = useNavigation();
     const [selectedValue, setSelectedValue] = useState(null);
     const placeholder = {
       label: 'Select an option...',
       value: null,
     };
     const options = [
-      { label: 'Groceries', value: 'option1' },
-      { label: 'Dining', value: 'option2' },
-      { label: 'Entertainment', value: 'option3' },
-      { label: 'Auto', value: 'option4' },
-      { label: 'Bills', value: 'option5' },
-      { label: 'Other', value: 'option6' },
+      { label: 'Groceries', value: 'groceries' },
+      { label: 'Dining', value: 'dining' },
+      { label: 'Entertainment', value: 'entertainment' },
+      { label: 'Auto', value: 'auto' },
+      { label: 'Bills', value: 'bills' },
+      { label: 'Other', value: 'other' },
     ];
+
+    // const navigateToGraphs = (value) => {
+    //   navigation.navigate('Graphs', { selectedValue: value });
+    // };
+
     return (
       <View styles={styles.container}>
         <Text style={styles.label}>Select an option:</Text>
         <RNPickerSelect
           placeholder={placeholder}
           items={options}
-          onValueChange={(value) => setSelectedValue(value)}
+          onValueChange={(value) => {
+            setSelectedValue(value);
+            // navigateToGraphs(value);
+          }}
           value={selectedValue}
           style={styles.options}
         />
-        {/* {selectedValue && <Text>Selected: {selectedValue}</Text>} */}
+        {/*navigation.navigate('Graphs', {setSelectedValue(value) }) */}
       </View>
     );
   };

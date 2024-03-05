@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, FlatList ,Image} from 'react-
 import React, { useEffect, useState, useCallback } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import Nav from '../components/Nav';
-import  { collection, getDocs } from 'firebase/firestore';
+import  { collection, getDocs, doc, getDoc } from 'firebase/firestore';
 import {FIREBASE_AUTH, FIREBASE_DB } from '../Firebase';
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -12,7 +12,22 @@ const Home = () => {
   const navigation = useNavigation();
   const [transactions, setTransactions] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
+  const [fName, setFName] = useState("");
 
+  const fetchUserData = async () => {
+    const userID = FIREBASE_AUTH.currentUser.uid;
+    const userRef = doc(FIREBASE_DB, 'users', userID);
+    const userSnap = await getDoc(userRef);
+    if (userSnap.exists()) {
+      const userData = userSnap.data();
+      console.log("User data:", userData);
+      const fetchedFName = userData.fName;
+      console.log("Fetched fName:", fetchedFName);
+      setFName(fetchedFName);
+    } else {
+      console.log("User data does not exist.");
+    }
+  };
 
   const fecthTransac = async () => {
     const userID = FIREBASE_AUTH.currentUser.uid;
@@ -35,45 +50,57 @@ const Home = () => {
     setTransactions(fetchedTransactions);
     console.log(fecthTransac);
   };
-    
 
   useFocusEffect(
     useCallback(() => {
-        fecthTransac();
+      console.log("Fetching user data...");
+      fetchUserData();
+      fecthTransac();
     }, [])
   );
 
-useEffect(() => {
-    // Calculate the total amount whenever transactions change
+  useEffect(() => {
     const total = transactions.reduce((sum, transaction) => sum + Number(transaction.amount || 0), 0);
     setTotalAmount(total);
   }, [transactions]);
 
-const renderHeader = () => (
+  const renderHeader = () => (
     <View style={styles.header}>
-        <Text style={styles.headerText}>Date</Text>
-        <Text style={styles.headerText}>Category</Text>
-        <Text style={styles.headerText}>Amount</Text>
+      <Text style={styles.headerText}>Date</Text>
+      <Text style={styles.headerText}>Category</Text>
+      <Text style={styles.headerText}>Amount</Text>
     </View>
 );
   return (
     <View style={styles.container} >
       <View style={styles.welcome}>
         <Text style={styles.company}>CashIQ</Text>
-        <Text style={styles.user}>Welcome {FIREBASE_AUTH.currentUser.displayName}</Text>
+        <Text style={styles.user}>Welcome {fName}</Text>
         <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-        <Image source={require('../assets/puppy.webp')} style={styles.img}/>
+          <Image source={require('../assets/puppy.webp')} style={styles.img}/>
         </TouchableOpacity>
       </View>
-      
-      <View style={styles.data}>
-        <TouchableOpacity onPress={() => navigation.navigate('Transaction')}>
+      <TouchableOpacity onPress={() => navigation.navigate('Transaction')}>
         <Text style={styles.title}>Add Transaction</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Graphs')}>
-            <Text style={styles.title} >Show Graph</Text>
-        </TouchableOpacity>
-
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('Graphs', { totalAmount, transactions: transactions })}>
+        <Text style={styles.title}>Show Graph</Text>
+      </TouchableOpacity>
+      <FlatList 
+        data={transactions} 
+        keyExtractor={(item) => item.id}
+        ListHeaderComponent={renderHeader}
+        renderItem={({ item, index }) => (
+          <View style={styles.item}>
+            <Text style={styles.column}>{item.date}</Text>
+            <Text style={styles.column}>{item.category}</Text>
+            <Text style={styles.column}>{item.amount}</Text>
+          </View>
+        )}
+      />
+      <View style={styles.total}>
+        <Text style={styles.totalAmount}>Total Amount: {totalAmount}</Text>
+      </View> 
         <View style={styles.list}>
           <FlatList 
             data={transactions} 
@@ -95,9 +122,9 @@ const renderHeader = () => (
       <Nav />
 
     </View>
-    
-  )
-}
+  );
+};
+
 
 export default Home
 
