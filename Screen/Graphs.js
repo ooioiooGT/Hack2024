@@ -4,9 +4,24 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import React, { useState } from 'react';
 import Dropdown from '../components/DropDown';
 import Nav from '../components/Nav';
+import { useRoute } from '@react-navigation/native';
 
 const Graphs = () => {
-  const [progress, setProgress] = useState(90); // Set initial progress
+  const [progress, setProgress] = useState(80); // Set initial progress
+  const { params } = useRoute(); // Use the useRoute() hook to get the route object and destructure params directly
+
+  const { totalAmount, transactions, selectedValue } = params;
+
+console.log('Total Amount:', totalAmount);
+console.log('Transactions:', transactions);
+console.log('Selected Value:', selectedValue);
+
+// Extract category and amount values from each transaction
+const categories = transactions.map(transaction => transaction.category);
+const amounts = transactions.map(transaction => transaction.amount);
+
+console.log('Categories:', categories);
+console.log('Amounts:', amounts);
 
   const handleProgressChange = (newProgress) => {
     setProgress(newProgress);
